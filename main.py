@@ -22,11 +22,15 @@ folium.TileLayer(
     tiles = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
     attr = 'Esri',
     name = 'Satellit',
-    overlay = False,
+    show = False,
+    overlay = True,
     control = True
     ).add_to(karte)
 
 folium.LayerControl().add_to(karte)
+
+for i, coord in enumerate(st.session_state.route_points):
+    folium.Marker(coord, popup=f"{i+1}. Wegpunkt", tooltip=f"{i+1}. Wegpunkt").add_to(karte)
 
 # Karte anzeigen
 map_data = st_folium(karte, width=700, height=500)
@@ -35,3 +39,4 @@ map_data = st_folium(karte, width=700, height=500)
 if map_data['last_clicked']:
     st.write('Koordinaten: ', map_data['last_clicked']['lat'], map_data['last_clicked']['lng'])
     st.session_state.route_points.append([map_data['last_clicked']['lat'], map_data['last_clicked']['lng']])
+
