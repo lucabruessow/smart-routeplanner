@@ -68,7 +68,7 @@ if len(st.session_state.route_points) >= 2:
             weight = 5,
             popup = f'Entfernung: {route_data['distance'] / 1000: .2f} km\nDauer: {route_data['duration'] / 60: .0f} min'
         ).add_to(m)
-
+    st.info(f'Entfernung: {route_data['distance'] / 1000: .2f} km\nDauer: {route_data['duration'] / 60: .0f} min')
 
 for i, coord in enumerate(st.session_state.route_points):
     folium.Marker(
